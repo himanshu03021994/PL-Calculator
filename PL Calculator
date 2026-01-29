@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal Loan Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #0077cc;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            background: #0077cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        button:hover {
+            background: #005fa3;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1>💰 Personal Loan Calculator</h1>
+
+    <input type="number" id="amount" placeholder="Loan Amount (₹)">
+    <input type="number" id="rate" placeholder="Interest Rate (%)">
+    <input type="number" id="time" placeholder="Loan Tenure (Years)">
+
+    <button onclick="calculateLoan()">Calculate EMI</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function calculateLoan() {
+        let P = document.getElementById("amount").value;
+        let R = document.getElementById("rate").value;
+        let T = document.getElementById("time").value;
+
+        if (P === "" || R === "" || T === "") {
+            document.getElementById("result").innerHTML = "Please fill all fields";
+            return;
+        }
+
+        R = R / 12 / 100;
+        T = T * 12;
+
+        let EMI = (P * R * Math.pow(1 + R, T)) / (Math.pow(1 + R, T) - 1);
+
+        document.getElementById("result").innerHTML =
+            "Monthly EMI: ₹ " + EMI.toFixed(2);
+    }
+</script>
+
+</body>
+</html>
